@@ -1,6 +1,7 @@
 require("updateGame")
 require("initGame")
 --drawGame = {}
+setColorDanger = {(0.9), (0.1), (0.1)}
 
 function drawGame()
     -- function drawTir(liste) ----x, y, angle, type
@@ -24,8 +25,16 @@ function drawGame()
     end
 
     for i, v in pairs(listeSprites) do
-    
-        love.graphics.print(tostring(v.type)..tostring(v.id) .. " PV "..tostring(v.PV), 900, 50 * i)
+        
+        --love.graphics.push() 
+        --if v.PV <= 5 then  love.graphics.setColor(setColorDanger)  end  
+        love.graphics.print(tostring(v.type)..tostring(v.id) .. " PV "..tostring(v.PV), 850, 100 * i)
+        if v.PV >= 0 then 
+            love.graphics.rectangle("line", 850, 100 * i + 30, 100, 10)
+            love.graphics.rectangle("fill", 850, 100 * i + 30, 10*v.PV, 10)
+        end
+        --love.graphics.pop()
     end
+    love.graphics.print(tostring(GameOver), 800, 500)
     
 end
