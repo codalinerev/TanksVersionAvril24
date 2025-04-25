@@ -94,7 +94,7 @@ function updateTankHero()
 end
 
 function updatePV()
-    GameOver = true
+    if ValidEnnemies <= 0 then GameOver = true
     for i,v in ipairs(listeSprites) do
         if v.visible == true and v.PV >= 0 then 
             GameOver = false
@@ -112,7 +112,7 @@ function updateTir() ----X,Y,angle,type, speed=4
         b.Y = b.Y + 2 * math.sin(b.angle)
         for _,v in pairs(listeSprites) do
             if v.visible == true and collideTir(b,v) then v.PV = v.PV - 1 
-            v.text = "collision" end
+            --v.text = "collision" end
         end
     end
 

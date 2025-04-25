@@ -1,6 +1,7 @@
 require("initGame")
 require("updateGame")
 require("drawGame")
+require("menuGameStart")
 --require("sprite")
 require("tank")
 --require("sprites")
@@ -19,7 +20,12 @@ function love.update(dt)
         updateTankEnnemy()
         updateTankHero()
         updateTir()
-        updatePV()       
+        updatePV() 
+    else choice = menuGameStart() 
+        if choice == "play" then 
+            initGame = initGame
+            GameOver = false
+        end       
     end
 
 end

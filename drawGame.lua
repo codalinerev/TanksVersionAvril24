@@ -35,6 +35,6 @@ function drawGame()
         end
         --love.graphics.pop()
     end
-    love.graphics.print(tostring(GameOver), 800, 500)
+    love.graphics.print("GameOver: "..tostring(GameOver), 800, 40)
     
 end

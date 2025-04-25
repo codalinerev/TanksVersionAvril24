@@ -15,6 +15,7 @@ love.graphics.print("init game", 100, 100)
 
 Tank = tank
 MyTank = Tank:new(950, 800, 2, 0, imgTank, imgTurret, "hero") 
+MyTank.PV = 100
 
 --MyTank.cibleX, MyTank.cibleY = love.mouse.getPosition()
 
