@@ -1,2 +1,4 @@
-ecran game Over
+
+bug: ennemies trop lents
+tir ralenti
  
