@@ -1,9 +1,12 @@
-videogame first lua project
+Welcome!
+
+This is a lua videogame. One hero (controlled by you) and four ennemies (they will follow you and shoot).
+Pannel with health 
 
 Hero moved by up/down/left/right keys 
      shoot with "space" key 
      aim with mouse position
-     100 PV at start
+     100 PV at start (lives)
 
 
 4 ennemy tanks: individual speed 

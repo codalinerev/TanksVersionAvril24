@@ -16,10 +16,11 @@ function drawGame()
     love.graphics.rectangle("fill", 850, 100, MyTank.PV, 20)  
     for i, v in pairs(listeTE) do 
         love.graphics.print(tostring(v.type)..tostring(v.id) .. " PV "..tostring(v.PV), 850, 80 * i + 110)
-        love.graphics.rectangle("line", 850, 80 * i + 130, 100, 10)
-        if v.PV >= 0 then            
+        if v.PV >= 0 and v.visible == true then   
+            love.graphics.rectangle("line", 850, 80 * i + 130, 100, 10)     
             love.graphics.rectangle("fill", 850, 80 * i + 130, 10*v.PV, 10)
-        end
+        else love.graphics.draw(v.image, 950, 80 * i + 100)  
+        end        
     end
     --love.graphics.print("GameOver: "..tostring(GameOver), 800, 40)
     
