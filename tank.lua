@@ -24,8 +24,7 @@ function tank:new(x, y, speed, angle, imgTank, imgTurret, type)
     newt.offsetX = newt.W/2
     newt.offsetY = newt.H/2
     newt.type = type
-    newt.rangeSee = 300
-    newt.rangeTir = 200
+    newt.range = 300
     newt.state = "patrol"
     newt.cibleX = 500
     newt.cibleY = 400

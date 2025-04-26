@@ -1,22 +1,19 @@
  updateGame = {}
  require("initGame")
  require("tank")
- ZoneSpoonX = 200
- ZoneSpoonY = 150
 
  function updateTankEnnemy()
     ValidEnnemies = 0
     for __,v in pairs(listeTE) do
-        if v.visible == true then
+        if v.PV > 0 then
             ValidEnnemies = ValidEnnemies + 1
             v.cibleX = MyTank.X 
             v.cibleY = MyTank.Y 
-            --v.angle = v.angleCible(v.cibleX, v.cibleY)
-            local dist = v.distCible(v.cibleX, v.cibleY)
-            --v.stateUpdate() --wander/patrol/follow/shoot/nil/changeDir
+            local dist = v.distCible(v.cibleX, v.cibleY)         
             v.dx = v.speed * math.cos(v.angle)
             v.dy = v.speed * math.sin(v.angle)
         
+            ------v.stateUpdate() --wander/patrol/follow/shoot/changeDir
             if v.state == nil then v.state = "changeDir"
             elseif v.state == "changeDir" then 
                 v.cibleX = math.random(50, 800)
@@ -25,8 +22,8 @@
                 v.state = "patrol"
                 v.dx = v.speed * math.cos(v.angle)
                 v.dy = v.speed * math.sin(v.angle) 
-            elseif v.state == "patrol" then  ------wander/patrol/follow/aim/shoot/changeDir          
-                if dist <= v.rangeSee then v.state = "follow"
+            elseif v.state == "patrol" then          
+                if dist <= v.range then v.state = "follow"
                     v.time = 0
                     v.angle = v.angleCible(v.cibleX, v.cibleY)
                     v.dx = v.speed * math.cos(v.angle)
@@ -35,13 +32,13 @@
                 v.text = v.state
              
             elseif v.state == "follow" then 
-                if dist <= v.rangeTir and v.time >= 1 
+                if dist <= v.range and v.time >= 1 
                     then v.state = "shoot"
                         v.angle = v.angleCible(v.cibleX, v.cibleY)
                         v:tir(v.X, v.Y, v.angle)
                         v.text = "shoot"
                         v.time = 0
-                elseif dist > v.rangeSee then v.state = "changeDir"    
+                elseif dist > v.range then v.state = "changeDir"    
                 end 
             elseif v.state == "shoot" then 
                     if v.time >= 2 then 
@@ -91,17 +88,19 @@ function updateTankHero()
     MyTank.text = tostring(MyTank.X).."  "..tostring(MyTank.Y)
     MyTank.X = MyTank.X + MyTank.dx
     MyTank.Y = MyTank.Y + MyTank.dy
+    --if MyTank.PV <= 0 then GameOver = true end
 end
 
 function updatePV()
-    if ValidEnnemies <= 0 then GameOver = true
-    for i,v in ipairs(listeSprites) do
-        if v.visible == true and v.PV >= 0 then 
-            GameOver = false
-        elseif v.visible == true and v.PV < 0 then 
-            love.audio.play(soundExplosion)
-            --table.remove(listeSprites, i)
-            v.visible = false            
+    if ValidEnnemies <= 0 then GameOver = true end
+    if MyTank.PV <0 then GameOver = true end
+    if GameOver == false then 
+        for i,v in ipairs(listeSprites) do
+            if v.visible == true and v.PV < 0 then 
+                love.audio.play(soundExplosion)
+                --table.remove(listeSprites, i)
+                v.visible = false            
+            end
         end
     end
 end
@@ -112,7 +111,8 @@ function updateTir() ----X,Y,angle,type, speed=4
         b.Y = b.Y + 2 * math.sin(b.angle)
         for _,v in pairs(listeSprites) do
             if v.visible == true and collideTir(b,v) then v.PV = v.PV - 1 
-            --v.text = "collision" end
+            --v.text = "collision" 
+            end
         end
     end
 
@@ -125,6 +125,13 @@ function collideTir(b, v)
     return collision
 end
 
-function updateState()
+function updateGameOver()
+    if MyTank.PV <= 0 or ValidEnnemies <= 0 then
+        GameOver = true
+        if MyTank.PV >= 0 then GameOverText = "WIN"
+        else GameOverText = "LOSE" 
+        end
+    end
+
 end
 
