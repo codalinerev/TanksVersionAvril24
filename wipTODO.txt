@@ -1,4 +1,5 @@
 
-bug: ennemies trop lents
+bug: ennemies trop lents    dt = 1/120!
 tir ralenti
+
  

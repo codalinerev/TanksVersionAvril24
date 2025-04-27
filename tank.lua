@@ -5,12 +5,12 @@ function tank:new(x, y, speed, angle, imgTank, imgTurret, type)
     local newt = {}
     newt.X = x 
     newt.Y = y 
-    newt.dx = 0
-    newt.dy = 0
+    newt.dx = 1
+    newt.dy = 1
     newt.speed = speed
     newt.angle = 0 --math.random(0,5) 
     newt.image = imgTank
-    newt.time = 1
+    newt.time = 0
     newt.turretImg = imgTurret
     newt.turretImgH = newt.turretImg:getHeight()
     newt.turretImgW = newt.turretImg:getWidth()
@@ -42,6 +42,16 @@ function tank:new(x, y, speed, angle, imgTank, imgTurret, type)
         newt.FirePointX = newt.X + 25 + newt.turretImgW * math.cos(angle)
         newt.FirePointY = newt.Y + 25 + newt.turretImgH/2*math.sin(angle)
         newt.angle = angle
+    end
+
+    function newt:newPositionX(dx)
+        local x = dx + newt.X
+        return x
+    end
+
+    function newt:newPositionY(dy)
+        local y = dy + newt.Y
+        return y
     end
 
 
