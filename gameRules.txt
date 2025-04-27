@@ -1,0 +1,18 @@
+ Welcome!
+
+This is a lua videogame. One hero (controlled by you) and four ennemies
+ (they will follow you and shoot). Pannel with health on right side of screen.
+
+Hero moved by up/down/left/right keys
+     shoots with "space" key 
+     aims at mouse position
+     100 PV at start (lives)
+
+4 ennemy tanks: individual speed 
+                4 states: changeDir, patrol, follow, shoot 
+                PV init = 10
+
+You win if you destroy all enemies while you still have lives (PV).
+
+Game ends if all enemies are destroyed (You win) 
+          or if the Hero has no more PV (<=0)(You lose).
