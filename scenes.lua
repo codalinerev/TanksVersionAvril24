@@ -1,5 +1,5 @@
  scenes = {}
-
+------ ecrans de début et de fin------------------------
  sceneStart = love.graphics.newImage("assets/Ecranstart.png")
  sceneYouWin = love.graphics.newImage("assets/GOWin.png")
  sceneYouLost = love.graphics.newImage("assets/GOLost.png")
