@@ -1,0 +1,46 @@
+Les modules:
+
+Le module tank.lua créé une table tank avec des fonctions :
+- fonction de création d'un nouveau objet tank (newt()) qui returns le nouveau tank
+- l'objet tank a des fonctions : calcul de l'angle vers la cible, 
+calcul de la distance jusqu'à la cible, test si un mouvement fait sortir de l'écran, 
+calcul de distance entre deux points;
+- fonction tank:draw() pour se dessiner (tank et tourelle).
+
+
+Le module initGame est appelé une fois au début du jeu puis il est 
+rappelé chaque fois quand on rejoue.
+Il créé le héro et 4 ennemies, une liste de tanks ennemies (listeTE) et une liste de 
+sprites (listeSprites qui contient le héro et les tanks ennemies).
+
+Le module drawGame dessine les sprites (dans la listeSprites), les balles tirées
+qui n'ont pas explosé (elles explosent à l'impact) dans la listeBullets, le status
+ des PV du héro et des ennemies, le text "press p to pause".
+
+Le module updateGame met à jour le héro (mouvements avec les flèches ou tir) ,
+ les ennemies (machine à états), les tirs.
+
+ La machine à états des ennemies: updateTankEnnemy().
+ 4 états possibles: 
+ -"changeDir"(nouvelle direction choisie au hazard vers une cible random x,y
+  sur l'écran; passage à l'état "patrol")
+ -"patrol" (continue dans la direction choisie ; 
+ teste si le tank héro est dans la portée = range; si oui, la cible devient le tank
+  héro, passage à l'état "follow"; sinon et si le timer est supérieur à 3 secondes,
+   il change de direction, passage en "changeDir");
+ -"follow"(la cible est fixée sur le héro qui est dans la portée, 
+ l'ennemi a un timer dans l'état follow: après 1 seconde de suivi, si la cible
+  est toujours dans la portée,passage à l'état "shoot"); 
+  -"shoot"(l'ennemi tire, ça créé une balle qui se déplace dans la 
+  direction de la cible; le minuteur est remis à zéro; passage à l'état "follow").
+  Si l'ennemi perd la cible (le héro sort de la portée), passage à l'état "patrol", 
+  en gardant la même direction.
+
+Le tir est géré par une listeBullets qui contient les balles avec
+   des X et Y actualisés. 
+  
+Le module scenes.lua contient l'écran d'accueil et l'écran de Game Over avec 
+l'option gagné ou perdu et la possibilité de rejouer.
+
+ 
+      
