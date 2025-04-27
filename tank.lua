@@ -54,34 +54,6 @@ function tank:new(x, y, speed, angle, imgTank, imgTurret, type)
         return y
     end
 
-
-    function newt:update(dt)
-        
-        if newt.onmap(newt.X + newt.dx * dt + 20, newt.Y + newt.dy * dt + 20 ) then 
-            newt.X = newt.X + newt.dx * dt
-            newt.Y = newt.Y + newt.dy * dt
-            newt.text = tostring(newt.X)
-            newt.FirePointX = newt.X + 25 + newt.turretImgW* math.cos(newt.angle)
-            newt.FirePointY = newt.Y + 5 + newt.H/2*math.sin(newt.angle)
-        else newt.angle = math.random(0, 5)
-        end
-        if newt.type == "hero" then 
-            newt.dx = 0
-            newt.dy = 0
-            if love.keyboard.isDown("up") then newt.dy = -1 end
-            if love.keyboard.isDown("down") then newt.dy = 1 end
-            if love.keyboard.isDown("left") then newt.dx = -1 end
-            if love.keyboard.isDown("right") then newt.dx = 1 end
-           
-            local x,y = love.mouse.getPosition()
-            angle = math.atan2(math.sin(y - newt.Y), math.cos(x - newt.X))
-            newt.FirePointX = newt.X + 25 + newt.turretImgW * math.cos(angle)
-            newt.FirePointY = newt.Y + 25 + newt.turretImgH/2 * math.sin(angle)
-            newt.angle = angle
-            newt.text = tostring(x).."  "..tostring(y)
-        end
-    end
-
     function newt:tir(X, Y, angle)
         local bullet = {}
         bullet.X = X
