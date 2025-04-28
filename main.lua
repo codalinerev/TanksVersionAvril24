@@ -10,6 +10,7 @@ ScreenH = 800
 scenes = scenes ---- "Play", "End"
 
 function love.load() 
+    love.window.setMode(1000, 800)
     initGame() --- module init jeu---------------
     GameOver = false 
     scene = "Start"

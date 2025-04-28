@@ -8,7 +8,7 @@ function initGame()
     soundExplosion = love.audio.newSource("assets/explosion.wav", "static")
     soundTir = love.audio.newSource("assets/bruit.wav", "static")
 
-    love.window.setMode(1000, 800)
+   
     love.graphics.setBackgroundColor(0.3, 0.5, 0.5)
 
     love.graphics.print("init game", 100, 100)
